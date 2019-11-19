@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/19 12:21:58 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/19 15:37:35 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,25 +103,26 @@ unsigned int	ft_getprecision(const char *format, int leng, va_list args)
 		return (ft_atoi(&format[leng]));
 	return (0);
 }
-cspdiuxX
+
 char *ft_gettype(const char *format, int leng)
 {
 	if (format[leng] == 'c')
 		return ("char");
 	if (format[leng] == 's')
-		return ("char *");
+		return ("string");
 	if (format[leng] == 'p')
 		return ("pointer");
 	if (format[leng] == 'd')
-		return ("int");
+		return ("decimal");
 	if (format[leng] == 'i')
 		return ("int");
 	if (format[leng] == 'u')
 		return ("unsigned int");
-	if (format[leng] == '')
-		return ("");
-	if (format[leng] == '')
-		return ("");
+	if (format[leng] == 'x')
+		return ("hexa");
+	if (format[leng] == 'X')
+		return ("hexaup");
+	return (0);
 }
 
 int	ft_getspe(const char *format, int leng, va_list args)
@@ -151,8 +152,18 @@ int	ft_getspe(const char *format, int leng, va_list args)
 			leng++;
 	}
 	spec.type = ft_gettype(format, leng);
+	if (spec.type != 0)
+	{
+		leng++;
+	}
+	else
+		return (-1);
 
 	printf("char: %c\n", format[leng]);
+	printf("flag: %c\n", spec.flags);
+	printf("width: %d\n", spec.width);
+	printf("precision: %d\n", spec.precision);
+	printf("type: %s\n", spec.type);
 
 	return (0);
 }
@@ -175,6 +186,7 @@ int ft_printf(const char *format, ...)
 	return leng;
 }
 
+// gcc -Wall -Wextra -Werror -L./ -lft -fsanitize=address main.c  && ./a.out
 int main()
 {
 	printf("%.*s - %s - %s\n", 3, "haha", "hihi", "hoho");
