@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/26 12:43:28 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/26 20:25:00 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	ft_getflag(const char *format, int leng)
 	return (0);
 }
 
-unsigned int	ft_getwidth(const char *format, int leng, va_list args)
+long	ft_getwidth(const char *format, int leng, va_list args)
 {
 	if (format[leng] == '*')
 	{
@@ -146,7 +146,7 @@ unsigned int	ft_getwidth(const char *format, int leng, va_list args)
 	return (0);
 }
 
-unsigned int	ft_getprecision(const char *format, int leng, va_list args)
+long	ft_getprecision(const char *format, int leng, va_list args)
 {
 	if (format[leng] == '.')
 		leng++;
@@ -330,7 +330,7 @@ char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
 	char			*buff;
 	unsigned long	ptrr;
 	char			*buffptr;
-	char			*buffspace;
+	char			*bspace;
 
 	buff = va_arg(args, char *);
 	ptrr = (unsigned long)buff;
@@ -339,11 +339,11 @@ char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
 	buffptr = ptr_addr(ptrr, buffptr, 0);
 	buffptr = ft_revtabpointer(buffptr);
 	if (ft_strlen(buffptr) < (unsigned long)spec.width)
-		buffspace = ft_malloc_space(spec.width - ft_strlen(buffptr), sizeof(char));
+		bspace = ft_malloc_space(spec.width - ft_strlen(buffptr), sizeof(char));
 	if (ft_strlen(buffptr) < (unsigned long)spec.width && spec.flags == '-')
-		buffptr = ft_strjoin(buffptr, buffspace);
+		buffptr = ft_strjoin(buffptr, bspace);
 	else if (ft_strlen(buffptr) < (unsigned long)spec.width)
-		buffptr = ft_strjoin(buffspace, buffptr);
+		buffptr = ft_strjoin(bspace, buffptr);
 	if (ptr)
 		ptr = ft_strjoin(ptr, buffptr);
 	else
@@ -351,24 +351,54 @@ char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
 	return (ptr);
 }
 
+char	*ft_putzeroflag(char *buff, int neg)
+{
+	long i;
+
+	i = 0;
+	if (neg == 1)
+	{
+		i = 1;
+		buff[0] = '-';
+	}
+	while (buff[i] == ' ' || buff[i] == '-')
+		buff[i++] = '0';
+	return (buff);
+}
+
+char	*ft_putzeroprec(char *buff, int neg, t_spec spec)
+{
+	long	i;
+	long	size;
+
+	size = ft_strlen(buff) - 1;
+	i = size - spec.precision;
+	while (ft_isdigit(buff[size]) == 1)
+		size--;
+	while (size > i && size >= 0)
+		buff[size--] = '0';
+	if (size < 0 && neg == 1)
+		buff = ft_strjoin("-", buff);
+	if (size > 0 && neg == 1)
+		buff[size] = '-';
+	return (buff);
+}
+
 char	*ft_replacespacezero(char *buff, t_spec spec)
 {
 	int	i;
-	int	size;
+	int	neg;
 
 	i = 0;
-	size = (int) ft_strlen(buff);
+	neg = 0;
+	while (buff[i] == ' ')
+		i++;
+	if (buff[i] == '-')
+		neg = 1;
 	if (spec.flags == '0')
-	{
-		while (buff[i] == ' ')
-			buff[i++] = '0';
-	}
+		buff = ft_putzeroflag(buff, neg);
 	else
-	{
-		i = size - spec.precision;
-		while (buff[i] == ' ')
-			buff[i++] = '0';
-	}
+		buff = ft_putzeroprec(buff, neg, spec);
 	return (buff);
 }
 
@@ -390,28 +420,312 @@ char	*ft_switchspace(char *buff)
 	return (ptr);
 }
 
-
-
 char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 {
 	char	*buff;
-	char	*buffspace;
+	char	*bspace;
 
 	buff = ft_itoa(va_arg(args, int));
 	if ((unsigned long)spec.width > ft_strlen(buff))
-		buffspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
-	if (spec.precision > (int) ft_strlen(buff) && spec.precision > spec.width)
-		buffspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
-	if (buffspace)
-		buff = ft_strjoin(buffspace, buff);
+		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
+	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
+		bspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
+	if (bspace)
+		buff = ft_strjoin(bspace, buff);
 	if (spec.precision >= 0 && spec.flags == '0')
 		spec.flags = '\0';
 	if (spec.precision <= 0)
 		spec.precision = 1;
-	if (spec.precision > (int)ft_strlen(buff))
-		buff = ft_strjoin(buff, buffspace);
+	if (spec.precision > (long)ft_strlen(buff))
+		buff = ft_strjoin(buff, bspace);
 	if (spec.precision > 1 || spec.flags == '0')
 		buff = ft_replacespacezero(buff, spec);
+	if (spec.flags == '-')
+		buff = ft_switchspace(buff);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+unsigned int	ft_itou(int i)
+{
+	unsigned int	u;
+
+	if (i < 0)
+		u = 2147483647 + 2147483649 + i;
+	else
+		u = i;
+	return (u);
+}
+
+char	*ft_itoa_long(long n)
+{
+	char	*str;
+	long	nb;
+	long	i;
+
+	nb = n;
+	i = ft_countnbr(nb);
+	if (!(str = (char*)malloc(sizeof(char) * (i + 1))))
+		return (NULL);
+	str[i--] = '\0';
+	if (nb == 0)
+		str[0] = 48;
+	if (nb < 0)
+	{
+		str[0] = '-';
+		nb = nb * -1;
+	}
+	while (nb > 0)
+	{
+		str[i] = 48 + (nb % 10);
+		nb = nb / 10;
+		i--;
+	}
+	return (str);
+}
+
+char	*ft_printf_u(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+	char	*bspace;
+
+	buff = ft_itoa_long(ft_itou(va_arg(args, int)));
+	if ((unsigned long)spec.width > ft_strlen(buff))
+		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
+	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
+		bspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
+	if (bspace)
+		buff = ft_strjoin(bspace, buff);
+	if (spec.precision >= 0 && spec.flags == '0')
+		spec.flags = '\0';
+	if (spec.precision <= 0)
+		spec.precision = 1;
+	if (spec.precision > (long)ft_strlen(buff))
+		buff = ft_strjoin(buff, bspace);
+	if (spec.precision > 1 || spec.flags == '0')
+		buff = ft_replacespacezero(buff, spec);
+	if (spec.flags == '-')
+		buff = ft_switchspace(buff);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+char	*ft_converthexa(long nbr, char *buffptr, int i)
+{
+	if (nbr >= 16)
+		buffptr = ft_converthexa(nbr / 16, buffptr, i + 1);
+	nbr = nbr % 16 + 48;
+	if (nbr > 57)
+		nbr += 39;
+	buffptr[i] = nbr;
+	return (buffptr);
+}
+
+char	*ft_converthexaupper(long nbr, char *buffptr, int i)
+{
+	if (nbr >= 16)
+		buffptr = ft_converthexaupper(nbr / 16, buffptr, i + 1);
+	nbr = nbr % 16 + 48;
+	if (nbr > 57)
+		nbr += 7;
+	buffptr[i] = nbr;
+	return (buffptr);
+}
+
+char	*ft_revtab(char *buffptr)
+{
+	int		leng;
+	int		i;
+	char	c;
+
+	i = 0;
+	leng = ft_strlen(buffptr) - 1;
+	while(i <= leng)
+	{
+		c = buffptr[i];
+		buffptr[i] = buffptr[leng];
+		buffptr[leng] = c;
+		i++;
+		leng--;
+	}
+	return (buffptr);
+}
+
+char	*ft_itox(long nbr)
+{
+	char	*buffptr;
+
+	buffptr = ft_calloc(2, sizeof(char *));
+	buffptr = ft_converthexa(nbr, buffptr, 0);
+	buffptr = ft_revtab(buffptr);
+	return (buffptr);
+}
+
+char	*ft_itoxupper(long nbr)
+{
+	char	*buffptr;
+
+	buffptr = ft_calloc(2, sizeof(char *));
+	buffptr = ft_converthexaupper(nbr, buffptr, 0);
+	buffptr = ft_revtab(buffptr);
+	return (buffptr);
+}
+
+int	ft_ishexa(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))
+		return (1);
+	return (0);
+}
+
+int	ft_ishexaupper(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))
+		return (1);
+	return (0);
+}
+
+char	*ft_putzeroflagx(char *buff, int neg)
+{
+	long i;
+
+	i = 0;
+	if (neg == 1)
+	{
+		i = 1;
+		buff[0] = '-';
+	}
+	while (buff[i] == ' ' || buff[i] == '-')
+		buff[i++] = '0';
+	return (buff);
+}
+
+char	*ft_putzeroprecx(char *buff, int neg, t_spec spec)
+{
+	long	i;
+	long	size;
+
+	size = ft_strlen(buff) - 1;
+	i = size - spec.precision;
+	while (ft_ishexa(buff[size]) == 1)
+		size--;
+	while (size > i && size >= 0)
+		buff[size--] = '0';
+	if (size < 0 && neg == 1)
+		buff = ft_strjoin("-", buff);
+	if (size > 0 && neg == 1)
+		buff[size] = '-';
+	return (buff);
+}
+
+char	*ft_putzeroprecxup(char *buff, int neg, t_spec spec)
+{
+	long	i;
+	long	size;
+
+	size = ft_strlen(buff) - 1;
+	i = size - spec.precision;
+	while (ft_ishexaupper(buff[size]) == 1)
+		size--;
+	while (size > i && size >= 0)
+		buff[size--] = '0';
+	if (size < 0 && neg == 1)
+		buff = ft_strjoin("-", buff);
+	if (size > 0 && neg == 1)
+		buff[size] = '-';
+	return (buff);
+}
+
+char	*ft_repspczerox(char *buff, t_spec spec)
+{
+	int	i;
+	int	neg;
+
+	i = 0;
+	neg = 0;
+	while (buff[i] == ' ')
+		i++;
+	if (buff[i] == '-')
+		neg = 1;
+	if (spec.flags == '0')
+		buff = ft_putzeroflagx(buff, neg);
+	else
+		buff = ft_putzeroprecx(buff, neg, spec);
+	return (buff);
+}
+
+char	*ft_repspczeroxup(char *buff, t_spec spec)
+{
+	int	i;
+	int	neg;
+
+	i = 0;
+	neg = 0;
+	while (buff[i] == ' ')
+		i++;
+	if (buff[i] == '-')
+		neg = 1;
+	if (spec.flags == '0')
+		buff = ft_putzeroflagx(buff, neg);
+	else
+		buff = ft_putzeroprecxup(buff, neg, spec);
+	return (buff);
+}
+
+char	*ft_printf_x(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+	char	*bspace;
+
+	buff = ft_itox(ft_itou(va_arg(args, int)));
+	if ((unsigned long)spec.width > ft_strlen(buff))
+		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
+	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
+		bspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
+	if (bspace)
+		buff = ft_strjoin(bspace, buff);
+	if (spec.precision >= 0 && spec.flags == '0')
+		spec.flags = '\0';
+	if (spec.precision <= 0)
+		spec.precision = 1;
+	if (spec.precision > (long)ft_strlen(buff))
+		buff = ft_strjoin(buff, bspace);
+	if (spec.precision > 1 || spec.flags == '0')
+		buff = ft_repspczerox(buff, spec);
+	if (spec.flags == '-')
+		buff = ft_switchspace(buff);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+char	*ft_printf_xup(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+	char	*bspace;
+	buff = ft_itoxupper(ft_itou(va_arg(args, int)));
+	if ((unsigned long)spec.width > ft_strlen(buff))
+		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
+	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
+		bspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
+	if (bspace)
+		buff = ft_strjoin(bspace, buff);
+	if (spec.precision >= 0 && spec.flags == '0')
+		spec.flags = '\0';
+	if (spec.precision <= 0)
+		spec.precision = 1;
+	if (spec.precision > (long)ft_strlen(buff))
+		buff = ft_strjoin(buff, bspace);
+	if (spec.precision > 1 || spec.flags == '0')
+		buff = ft_repspczeroxup(buff, spec);
 	if (spec.flags == '-')
 		buff = ft_switchspace(buff);
 	if (ptr)
@@ -443,12 +757,12 @@ char	*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format)
 		ptr = ft_printf_d_i(spec, args, ptr);
 	if (spec.type == 'i')
 		ptr = ft_printf_d_i(spec, args, ptr);
-	// if (spec.type == 'u')
-	// 	ptr = ft_printf_u(spec, args, ptr);
-	// if (spec.type == 'x')
-	// 	ptr = ft_printf_x(spec, args, ptr);
-	// if (spec.type == 'X')
-	// 	ptr = ft_printf_X(spec, args, ptr);
+	if (spec.type == 'u')
+	 	ptr = ft_printf_u(spec, args, ptr);
+	if (spec.type == 'x')
+	 	ptr = ft_printf_x(spec, args, ptr);
+	if (spec.type == 'X')
+	 	ptr = ft_printf_xup(spec, args, ptr);
 	return (ptr);
 }
 
@@ -510,14 +824,14 @@ int ft_printf(const char *format, ...)
 		}
 	va_end(args);
 	ft_putstr_fd(ptr, 1);
-	return leng;
+	return (ft_strlen(ptr));
 }
 
 // gcc -Wall -Wextra -Werror -L./ -lft -fsanitize=address main.c  && ./a.out
 int main()
 {
-	int j = printf("Bonjour%5c + %*.*s - %-13p - %-13.8d$\n", 'N', 10, 5, "Lauraa", "héhé", 118218);
-	int i = ft_printf("Bonjour%5c + %*.*s - %-13p - %-13.8i$\n", 'N', 10, 5, "Lauraa", "héhé", 118218);
+	int j = printf("Bonjour%5c + %*.*s - %-13p - %010d - %-20.12u - %-10.9x - %-10.9X$\n", 'N', 10, 5, "Lauraa", "héhé", -118218, -1, -1, -1234332);
+	int i = ft_printf("Bonjour%5c + %*.*s - %-13p - %010i - %-20.12u - %-10.9x - %-10.9X$\n", 'N', 10, 5, "Lauraa", "héhé", -118218, -1, -1, -1234332);
 	printf("%d - %d\n", j, i);
 	return 0;
 }
