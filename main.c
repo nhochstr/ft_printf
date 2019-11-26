@@ -6,13 +6,22 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/19 15:37:35 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/26 12:43:28 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
 #include "libft.h"
+
+int	ft_getleng(int leng)
+{
+	static int i = 0;
+
+	if (leng > 0)
+		i = leng;
+	return (i);
+}
 
 int	ft_countstring(char const *s, char *str)
 {
@@ -54,6 +63,17 @@ unsigned long	ft_strlento(char *str, char c)
 	return (i);
 }
 
+char	*ft_strdupchar(char s)
+{
+	char	*ptr;
+
+	if (!(ptr = malloc(sizeof(char) + 1)))
+		return (NULL);
+	ptr[0] = s;
+	ptr[1] = '\0';
+	return (ptr);
+}
+
 char	*ft_strdup_to(char *s, char c)
 {
 	char	*ptr;
@@ -70,6 +90,43 @@ char	*ft_strdup_to(char *s, char c)
 	ptr[i] = '\0';
 	return (ptr);
 }
+
+char	*ft_strjoinchar(char const *s1, char const s2)
+{
+	char	*ptr;
+	int		i;
+	int		leng;
+
+	leng = ft_strlen((char*)s1) + 1;
+	i = 0;
+	if (!(ptr = malloc((leng + 1) * sizeof(char))))
+		return (NULL);
+	while (*s1 != '\0')
+		ptr[i++] = *s1++;
+
+	ptr[i++] = s2;
+	ptr[i] = '\0';
+	return (ptr);
+}
+
+char	*ft_strjoin_to(char const *s1, char const *s2, char c)
+{
+	char	*ptr;
+	int		i;
+	int		leng;
+
+	leng = ft_strlen((char*)s1) + ft_strlento((char*)s2, c);
+	i = 0;
+	if (!(ptr = malloc((leng + 1) * sizeof(char))))
+		return (NULL);
+	while (*s1 != '\0')
+		ptr[i++] = *s1++;
+	while (*s2 != c && *s2 != '\0')
+		ptr[i++] = *s2++;
+	ptr[i] = '\0';
+	return (ptr);
+}
+
 
 char	ft_getflag(const char *format, int leng)
 {
@@ -94,38 +151,308 @@ unsigned int	ft_getprecision(const char *format, int leng, va_list args)
 	if (format[leng] == '.')
 		leng++;
 	else
-		return (0);
+		return (-1);
 	if (format[leng] == '*')
 	{
 		return (va_arg(args, int));
 	}
 	else if (ft_isdigit(format[leng]) == 1)
 		return (ft_atoi(&format[leng]));
-	return (0);
+	return (-1);
 }
 
-char *ft_gettype(const char *format, int leng)
+char ft_gettype(const char *format, int leng)
 {
 	if (format[leng] == 'c')
-		return ("char");
+		return ('c');
 	if (format[leng] == 's')
-		return ("string");
+		return ('s');
 	if (format[leng] == 'p')
-		return ("pointer");
+		return ('p');
 	if (format[leng] == 'd')
-		return ("decimal");
+		return ('d');
 	if (format[leng] == 'i')
-		return ("int");
+		return ('i');
 	if (format[leng] == 'u')
-		return ("unsigned int");
+		return ('u');
 	if (format[leng] == 'x')
-		return ("hexa");
+		return ('x');
 	if (format[leng] == 'X')
-		return ("hexaup");
+		return ('X');
 	return (0);
 }
 
-int	ft_getspe(const char *format, int leng, va_list args)
+int ft_verifflagnull(t_spec spec)
+{
+	if (spec.flags != '0')
+		return (1);
+	if (spec.type == 'c' || spec.type == 'p' || spec.type == 's')
+		return (0);
+	return (1);
+}
+
+void	ft_bblank(void *s, size_t n)
+{
+	size_t		i;
+
+	i = 0;
+	while (n--)
+		((unsigned char *)s)[i++] = ' ';
+}
+
+char	*ft_malloc_space(size_t count, size_t size)
+{
+	char	*ptr;
+
+	if (!(ptr = malloc(count * size + 1)))
+		return (NULL);
+	ft_bblank(ptr, count * size);
+	ptr[count] = 0;
+	return (ptr);
+}
+
+int	ft_sizeprints(t_spec spec, char *copy)
+{
+	int	size;
+	int				leng;
+
+	leng = ft_strlen(copy);
+	size = leng;
+	if (spec.precision >= 0 && leng > spec.precision)
+		size = spec.precision;
+	if (spec.width > size)
+		size = spec.width;
+	return (size);
+}
+
+char *ft_printf_c(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+
+	if (spec.width > 1)
+		buff = ft_malloc_space(spec.width, sizeof(char));
+	else
+		buff = ft_malloc_space(1, sizeof(char));
+	if (spec.flags == '-' && spec.width > 1)
+		buff[0] = va_arg(args, int);
+	else if (spec.width > 1)
+		buff[spec.width - 1] = va_arg(args, int);
+	else
+		buff[0] = va_arg(args, int);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+char	*ft_printsleft(t_spec spec, char *copy, char *buff, unsigned int size)
+{
+	int	i;
+	int	j;
+	int	k;
+
+	i = 0;
+	j = 0;
+	k = 0;
+	if (spec.width == 0)
+		spec.width = size;
+	if (spec.precision < 0)
+		spec.precision = size;
+	if (spec.flags == '-')
+	{
+		while (buff[j] != 0 && i++ < spec.precision && copy[k] != '\0')
+			buff[j++] = copy[k++];
+	}
+	else
+	{
+		j = ft_strlen(buff) - 1;
+		k = ft_strlen(copy) - 1;
+		if (k >= spec.precision)
+			k = spec.precision - 1;
+		while (j >= 0 && k >= 0)
+			buff[j--] = copy[k--];
+	}
+	return (buff);
+}
+
+char	*ft_printf_s(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+	int		size;
+	char	*copy;
+
+	copy = ft_strdup(va_arg(args, char *));
+	size = ft_sizeprints(spec, copy);
+	buff = ft_malloc_space(size, sizeof(char));
+	buff = ft_printsleft(spec, copy, buff, size);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+char	*ft_revtabpointer(char *buffptr)
+{
+	int		leng;
+	int		i;
+	char	c;
+
+	i = 0;
+	buffptr = ft_strjoin(buffptr, "x0");
+	leng = ft_strlen(buffptr) - 1;
+
+	while(i <= leng)
+	{
+		c = buffptr[i];
+		buffptr[i] = buffptr[leng];
+		buffptr[leng] = c;
+		i++;
+		leng--;
+	}
+	return (buffptr);
+}
+
+char	*ptr_addr(long addr, char *buffptr, int i)
+{
+	if (addr >= 16)
+		buffptr = ptr_addr(addr / 16, buffptr, i + 1);
+	addr = addr % 16 + 48;
+	if (addr > 57)
+		addr += 39;
+	buffptr[i] = addr;
+	return (buffptr);
+}
+
+char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
+{
+	char			*buff;
+	unsigned long	ptrr;
+	char			*buffptr;
+	char			*buffspace;
+
+	buff = va_arg(args, char *);
+	ptrr = (unsigned long)buff;
+
+	buffptr = ft_calloc(2, sizeof(char *));
+	buffptr = ptr_addr(ptrr, buffptr, 0);
+	buffptr = ft_revtabpointer(buffptr);
+	if (ft_strlen(buffptr) < (unsigned long)spec.width)
+		buffspace = ft_malloc_space(spec.width - ft_strlen(buffptr), sizeof(char));
+	if (ft_strlen(buffptr) < (unsigned long)spec.width && spec.flags == '-')
+		buffptr = ft_strjoin(buffptr, buffspace);
+	else if (ft_strlen(buffptr) < (unsigned long)spec.width)
+		buffptr = ft_strjoin(buffspace, buffptr);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buffptr);
+	else
+		ptr = ft_strdup(buffptr);
+	return (ptr);
+}
+
+char	*ft_replacespacezero(char *buff, t_spec spec)
+{
+	int	i;
+	int	size;
+
+	i = 0;
+	size = (int) ft_strlen(buff);
+	if (spec.flags == '0')
+	{
+		while (buff[i] == ' ')
+			buff[i++] = '0';
+	}
+	else
+	{
+		i = size - spec.precision;
+		while (buff[i] == ' ')
+			buff[i++] = '0';
+	}
+	return (buff);
+}
+
+char	*ft_switchspace(char *buff)
+{
+	char			*ptr;
+	unsigned long	i;
+	unsigned long	j;
+
+	ptr = ft_strdup(buff);
+	i = 0;
+	j = 0;
+	while (buff[i] == ' ')
+		i++;
+	while (buff[i] != '\0')
+		ptr[j++] = buff[i++];
+	while (ptr[j] != '\0')
+		ptr[j++] = ' ';
+	return (ptr);
+}
+
+
+
+char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
+{
+	char	*buff;
+	char	*buffspace;
+
+	buff = ft_itoa(va_arg(args, int));
+	if ((unsigned long)spec.width > ft_strlen(buff))
+		buffspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
+	if (spec.precision > (int) ft_strlen(buff) && spec.precision > spec.width)
+		buffspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
+	if (buffspace)
+		buff = ft_strjoin(buffspace, buff);
+	if (spec.precision >= 0 && spec.flags == '0')
+		spec.flags = '\0';
+	if (spec.precision <= 0)
+		spec.precision = 1;
+	if (spec.precision > (int)ft_strlen(buff))
+		buff = ft_strjoin(buff, buffspace);
+	if (spec.precision > 1 || spec.flags == '0')
+		buff = ft_replacespacezero(buff, spec);
+	if (spec.flags == '-')
+		buff = ft_switchspace(buff);
+	if (ptr)
+		ptr = ft_strjoin(ptr, buff);
+	else
+		ptr = ft_strdup(buff);
+	return (ptr);
+}
+
+char	*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format)
+{
+	if (spec.type == 0)
+	{
+		if (ptr)
+			ptr = ft_strjoinchar(ptr, (char)format[ft_getleng(0)]);
+		else
+			ptr = ft_strdupchar((char)format[ft_getleng(0)]);
+		ft_getleng(ft_getleng(0) + 1);
+	}
+	if (ft_verifflagnull(spec) == 0)
+		return (NULL);
+	if (spec.type == 'c')
+		ptr = ft_printf_c(spec, args, ptr);
+	if (spec.type == 's')
+	 	ptr = ft_printf_s(spec, args, ptr);
+	if (spec.type == 'p')
+		ptr = ft_printf_p(spec, args, ptr);
+	if (spec.type == 'd')
+		ptr = ft_printf_d_i(spec, args, ptr);
+	if (spec.type == 'i')
+		ptr = ft_printf_d_i(spec, args, ptr);
+	// if (spec.type == 'u')
+	// 	ptr = ft_printf_u(spec, args, ptr);
+	// if (spec.type == 'x')
+	// 	ptr = ft_printf_x(spec, args, ptr);
+	// if (spec.type == 'X')
+	// 	ptr = ft_printf_X(spec, args, ptr);
+	return (ptr);
+}
+
+char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 {
 	t_spec spec;
 
@@ -143,7 +470,7 @@ int	ft_getspe(const char *format, int leng, va_list args)
 			leng++;
 	}
 	spec.precision = ft_getprecision(format, leng, args);
-	if (spec.precision != 0)
+	if (spec.precision != -1)
 	{
 		leng++;
 		while (ft_isdigit(format[leng]) == 1 )
@@ -153,19 +480,9 @@ int	ft_getspe(const char *format, int leng, va_list args)
 	}
 	spec.type = ft_gettype(format, leng);
 	if (spec.type != 0)
-	{
 		leng++;
-	}
-	else
-		return (-1);
-
-	printf("char: %c\n", format[leng]);
-	printf("flag: %c\n", spec.flags);
-	printf("width: %d\n", spec.width);
-	printf("precision: %d\n", spec.precision);
-	printf("type: %s\n", spec.type);
-
-	return (0);
+	ft_getleng(leng);
+	return (ft_printfspe(spec, args, ptr, format));
 }
 
 int ft_printf(const char *format, ...)
@@ -175,12 +492,22 @@ int ft_printf(const char *format, ...)
 	int		leng;
 
 	leng = 0;
+	ptr = NULL;
 	
 	va_start(args, format);
-			ptr = ft_strdup_to((char *)format, '%');
-			leng = ft_strlento((char *)format + leng, '%');
+		while (format[leng] != '\0')
+		{
+			if (ptr)
+				ptr = ft_strjoin_to(ptr, &format[leng], '%');
+			else
+				ptr = ft_strdup_to((char *)&format[leng], '%');
+			leng = leng + ft_strlento((char *)&format[leng], '%');
 			if (format[leng] != '\0')
-				ft_getspe(format, leng, args);
+			{
+				ptr = ft_getspe(format, leng, args, ptr);
+				leng = ft_getleng(0);
+			}
+		}
 	va_end(args);
 	ft_putstr_fd(ptr, 1);
 	return leng;
@@ -189,9 +516,8 @@ int ft_printf(const char *format, ...)
 // gcc -Wall -Wextra -Werror -L./ -lft -fsanitize=address main.c  && ./a.out
 int main()
 {
-	printf("%.*s - %s - %s\n", 3, "haha", "hihi", "hoho");
-	printf("%s - %s - %%s\n", "haha", "hihi");
-	int i = ft_printf("Bonjour%01234.*s%d%%d%%\n", 2, "hello", "hi");
-	printf("\ni = %d\n", i);
+	int j = printf("Bonjour%5c + %*.*s - %-13p - %-13.8d$\n", 'N', 10, 5, "Lauraa", "héhé", 118218);
+	int i = ft_printf("Bonjour%5c + %*.*s - %-13p - %-13.8i$\n", 'N', 10, 5, "Lauraa", "héhé", 118218);
+	printf("%d - %d\n", j, i);
 	return 0;
 }

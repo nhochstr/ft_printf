@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/19 12:17:09 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/21 13:52:29 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ typedef struct			s_spec
 	char	flags;
 	int		width;
 	int 	precision;
-	char	*type;
+	char	type;
+	char	*ptr;
 }						t_spec;
 
 unsigned long	ft_strlen(char *str);
