@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getwidth.c                                      :+:      :+:    :+:   */
+/*   ft_itox.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:21:37 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:43:09 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/11/29 22:24:01 by nhochstr          #+#    #+#             */
+/*   Updated: 2019/11/29 22:45:15 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft/libft.h"
 #include "libftprintf.h"
 
-long	ft_getwidth(const char *format, int leng, va_list args)
+char	*ft_itox(long nbr)
 {
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	char	*buffptr;
+
+	buffptr = ft_calloc(2, sizeof(char *));
+	buffptr = ft_converthexa(nbr, buffptr, 0);
+	buffptr = ft_revtab(buffptr);
+	return (buffptr);
 }

@@ -1,4 +1,5 @@
-SRCS	=	ft_printf.c \
+SRCS	=	ft_*.c
+
 
 OBJ	= ${SRCS:.c=.o}
 

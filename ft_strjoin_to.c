@@ -6,12 +6,13 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:18:30 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:18:40 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 23:32:10 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libftprintf.h"
+#include "libft/libft.h"
 
 char	*ft_strjoin_to(char const *s1, char const *s2, char c)
 {

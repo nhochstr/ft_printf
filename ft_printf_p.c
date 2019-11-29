@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:51:12 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:51:38 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 23:48:00 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
 	ptrr = (unsigned long)buff;
 
 	buffptr = ft_calloc(2, sizeof(char *));
-	buffptr = ptr_addr(ptrr, buffptr, 0);
+	buffptr = ft_ptr_addr(ptrr, buffptr, 0);
 	buffptr = ft_revtabpointer(buffptr);
 	if (ft_strlen(buffptr) < (unsigned long)spec.width)
 		buffspace = ft_malloc_space(spec.width - ft_strlen(buffptr), sizeof(char));

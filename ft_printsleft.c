@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:47:31 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:47:49 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 23:26:05 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,30 +15,28 @@
 
 char	*ft_printsleft(t_spec spec, char *copy, char *buff, unsigned int size)
 {
-	int	i;
-	int	j;
-	int	k;
-
-	i = 0;
-	j = 0;
-	k = 0;
+	int	i[3];
+	
+	i[0] = 0;
+	i[1] = 0;
+	i[2] = 0;
 	if (spec.width == 0)
 		spec.width = size;
 	if (spec.precision < 0)
 		spec.precision = size;
 	if (spec.flags == '-')
 	{
-		while (buff[j] != 0 && i++ < spec.precision && copy[k] != '\0')
-			buff[j++] = copy[k++];
+		while (buff[i[1]] != 0 && i[0]++ < spec.precision && copy[i[2]] != '\0')
+			buff[i[1]++] = copy[i[2]++];
 	}
 	else
 	{
-		j = ft_strlen(buff) - 1;
-		k = ft_strlen(copy) - 1;
-		if (k >= spec.precision)
-			k = spec.precision - 1;
-		while (j >= 0 && k >= 0)
-			buff[j--] = copy[k--];
+		i[1] = ft_strlen(buff) - 1;
+		i[2] = ft_strlen(copy) - 1;
+		if (i[2] >= spec.precision)
+			i[2] = spec.precision - 1;
+		while (i[1] >= 0 && i[2] >= 0)
+			buff[i[1]--] = copy[i[2]--];
 	}
 	return (buff);
 }

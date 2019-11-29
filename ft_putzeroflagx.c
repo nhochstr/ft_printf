@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ptr_addr.c                                         :+:      :+:    :+:   */
+/*   ft_putzeroflagx.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:49:56 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:50:13 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/11/29 22:27:50 by nhochstr          #+#    #+#             */
+/*   Updated: 2019/11/29 23:28:29 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*ptr_addr(long addr, char *buffptr, int i)
+char	*ft_putzeroflagx(char *buff, int neg)
 {
-	if (addr >= 16)
-		buffptr = ptr_addr(addr / 16, buffptr, i + 1);
-	addr = addr % 16 + 48;
-	if (addr > 57)
-		addr += 39;
-	buffptr[i] = addr;
-	return (buffptr);
+	long i;
+
+	i = 0;
+	if (neg == 1)
+	{
+		i = 1;
+		buff[0] = '-';
+	}
+	while (buff[i] == ' ' || buff[i] == '-')
+		buff[i++] = '0';
+	return (buff);
 }

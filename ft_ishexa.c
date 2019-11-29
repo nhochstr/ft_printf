@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getwidth.c                                      :+:      :+:    :+:   */
+/*   ft_ishexa.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:21:37 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:43:09 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/11/29 22:26:22 by nhochstr          #+#    #+#             */
+/*   Updated: 2019/11/29 22:43:21 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft/libft.h"
 #include "libftprintf.h"
 
-long	ft_getwidth(const char *format, int leng, va_list args)
+int	ft_ishexa(int c)
 {
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))
+		return (1);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 21:12:55 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 23:47:27 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ char			*ft_printf_c(t_spec spec, va_list args, char *ptr);
 char			*ft_printsleft(t_spec spec, char *copy, char *buff, unsigned int size);
 char			*ft_printf_s(t_spec spec, va_list args, char *ptr);
 char			*ft_revtabpointer(char *buffptr);
-char			*ptr_addr(long addr, char *buffptr, int i);
+char			*ft_ptr_addr(long addr, char *buffptr, int i);
 char			*ft_printf_p(t_spec spec, va_list args, char *ptr);
 char			*ft_putzeroflag(char *buff, int neg);
 char			*ft_putzeroprec(char *buff, int neg, t_spec spec);
@@ -72,5 +72,7 @@ char			*ft_printf_xup(t_spec spec, va_list args, char *ptr);
 char			*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format);
 char			*ft_getspe(const char *format, int leng, va_list args, char	*ptr);
 int				ft_printf(const char *format, ...);
+int				ft_getspelengzero(int leng, const char *format);
+char			*ft_printfspeptr(char *ptr, const char *format);
 
 #endif

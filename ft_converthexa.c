@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getwidth.c                                      :+:      :+:    :+:   */
+/*   ft_converthexa.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:21:37 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:43:09 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/11/29 22:22:33 by nhochstr          #+#    #+#             */
+/*   Updated: 2019/11/29 22:37:44 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft/libft.h"
 #include "libftprintf.h"
 
-long	ft_getwidth(const char *format, int leng, va_list args)
+char	*ft_converthexa(long nbr, char *buffptr, int i)
 {
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	if (nbr >= 16)
+		buffptr = ft_converthexa(nbr / 16, buffptr, i + 1);
+	nbr = nbr % 16 + 48;
+	if (nbr > 57)
+		nbr += 39;
+	buffptr[i] = nbr;
+	return (buffptr);
 }
