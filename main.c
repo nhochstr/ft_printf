@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:37:07 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/30 00:08:00 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -830,6 +830,10 @@ int ft_printf(const char *format, ...)
 }
 */
 // gcc -Wall -Wextra -Werror -L./ -lft -fsanitize=address main.c  && ./a.out
+
+// tester si % est le premier char
+// tester si % est le dernier char
+// tester sans %
 int main()
 {
 	int j = printf("Bonjour%5c + %*.*s - %-13p - %010d - %-20.12u - %-10.9x - %-10.9X$\n", 'N', 10, 5, "Lauraa", "héhé", -118218, -1, -1, -1234332);

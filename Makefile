@@ -1,4 +1,4 @@
-SRCS	=	ft_*.c
+SRCS	=	$(wildcard ft_*.c)
 
 
 OBJ	= ${SRCS:.c=.o}

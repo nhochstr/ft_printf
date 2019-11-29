@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:47:27 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/30 00:24:25 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ char			*ft_printf_xup(t_spec spec, va_list args, char *ptr);
 char			*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format);
 char			*ft_getspe(const char *format, int leng, va_list args, char	*ptr);
 int				ft_printf(const char *format, ...);
-int				ft_getspelengzero(int leng, const char *format);
+int				ft_getspelengwidth(const char *format, int leng);
 char			*ft_printfspeptr(char *ptr, const char *format);
 
 #endif

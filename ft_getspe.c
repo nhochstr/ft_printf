@@ -6,14 +6,14 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:42:35 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/30 00:24:27 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libftprintf.h"
 
-int	ft_getspelengzero(int leng, const char *format)
+int		ft_getspelengwidth(const char *format, int leng)
 {
 	while (ft_isdigit(format[leng]) == 1 )
 		leng++;
@@ -33,7 +33,7 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 		leng++;
 	spec.width = ft_getwidth(format, leng, args);
 	if (spec.width != 0)
-		ft_getspelengzero(leng, format);
+		leng = ft_getspelengwidth(format, leng);
 	spec.precision = ft_getprecision(format, leng, args);
 	if (spec.precision != -1)
 	{
