@@ -6,14 +6,14 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 20:00:13 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 21:12:55 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-# include <stdio.h>
+# include <stdlib.h>
 # include <stdarg.h>
 # include "libft/libft.h"
 
