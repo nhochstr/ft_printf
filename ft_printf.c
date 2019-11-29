@@ -6,13 +6,14 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/26 16:00:35 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/11/29 19:59:09 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdarg.h>
-#include "libft.h"
+#include "libft/libft.h"
+#include "libftprintf.h"
 
 int	ft_getleng(int leng)
 {
