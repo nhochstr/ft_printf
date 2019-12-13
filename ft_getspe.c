@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/30 00:24:27 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/12/13 14:44:08 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	if (format[leng] == '%')
 		leng++;
 	spec.flags = ft_getflag(format, leng);
-	if (spec.flags != 0)
+	while (spec.flags != 0 && (format[leng] == '-' || format[leng] == '0'))
 		leng++;
 	spec.width = ft_getwidth(format, leng, args);
 	if (spec.width != 0)

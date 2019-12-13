@@ -1,28 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getprecision.c                                  :+:      :+:    :+:   */
+/*   ft_printflen.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:22:54 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/12 13:20:21 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/12/12 14:37:45 by nhochstr          #+#    #+#             */
+/*   Updated: 2019/12/12 15:46:30 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libft/libft.h"
 #include "libftprintf.h"
 
-long	ft_getprecision(const char *format, int leng, va_list args)
+int	ft_printflen(char *ptr, const char *format)
 {
-	if (format[leng] == '.')
-		leng++;
-	else
-		return (-1);
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	int	i;
+
+	i = 1;
+	if (ptr[0] == '\0' && format[0]== '%')
+	{
+		while (format[i] == '0' || format[i] == '-' || format[i] == '.' || 
+			ft_isdigit(format[i]) == 1 || format[i] == 'c' || format[i] == '*')
+		{
+			if (format[i] == 'c')
+				return (1);
+			i++;
+		}
+	}
+	return(ft_strlen(ptr));
 }

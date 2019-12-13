@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:56:13 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:53:02 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/12/12 13:25:13 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,13 @@ char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 	char	*buff;
 	char	*buffspace;
 
+	buffspace = NULL;
 	buff = ft_itoa_long(va_arg(args, int));
+	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0')
+		return (ptr);
 	if ((unsigned long)spec.width > ft_strlen(buff))
 		buffspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
-	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
+	if (spec.precision > (long)ft_strlen(buff) && spec.precision > spec.width)
 		buffspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
 	if (buffspace)
 		buff = ft_strjoin(buffspace, buff);
@@ -36,9 +39,6 @@ char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 		buff = ft_replacespacezero(buff, spec);
 	if (spec.flags == '-')
 		buff = ft_switchspace(buff);
-	if (ptr)
-		ptr = ft_strjoin(ptr, buff);
-	else
-		ptr = ft_strdup(buff);
+	ptr = (ptr) ? ft_strjoin(ptr, buff) : ft_strdup(buff);
 	return (ptr);
 }

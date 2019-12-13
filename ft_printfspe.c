@@ -6,18 +6,33 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:33:31 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:11:42 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/12/13 14:44:13 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char	*ft_printfspeptr(char *ptr, const char *format)
+#include <stdio.h>
+
+char	*ft_printfspeptr(char *ptr, const char *format, t_spec spec)
 {
-	if (ptr)
-		ptr = ft_strjoinchar(ptr, (char)format[ft_getleng(0)]);
+	char	*buff;
+	int		leng;
+
+	leng = ft_getleng(0);
+	if (spec.width > 1)
+		buff = ft_malloc_space(spec.width, sizeof(char));
 	else
-		ptr = ft_strdupchar((char)format[ft_getleng(0)]);
+		buff = ft_malloc_space(1, sizeof(char));
+	if (spec.flags == '-' && spec.width > 1)
+		buff[0] = format[leng];
+	else if (spec.width > 1)
+		buff[spec.width - 1] = format[leng];
+	else
+		buff[0] = format[leng];
+	if (spec.flags == '0')
+		buff = ft_replacespacezero(buff, spec);
+	ptr = (ptr) ? ft_strjoin(ptr, buff) : ft_strdup(buff);
 	return (ptr);
 }
 
@@ -25,7 +40,7 @@ char	*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format)
 {
 	if (spec.type == 0)
 	{
-		ptr = ft_printfspeptr(ptr, format);
+		ptr = ft_printfspeptr(ptr, format, spec);
 		ft_getleng(ft_getleng(0) + 1);
 	}
 	if (ft_verifflagnull(spec) == 0)

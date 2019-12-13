@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:30:40 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:57:05 by nhochstr         ###   ########.fr       */
+/*   Updated: 2019/12/12 13:30:19 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ char	*ft_printf_x(t_spec spec, va_list args, char *ptr)
 	char	*buff;
 	char	*bspace;
 
+	bspace = NULL;
 	buff = ft_itox(ft_itou(va_arg(args, int)));
+	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0')
+		return (ptr);
 	if ((unsigned long)spec.width > ft_strlen(buff))
 		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
 	if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
@@ -36,9 +39,6 @@ char	*ft_printf_x(t_spec spec, va_list args, char *ptr)
 		buff = ft_repspczerox(buff, spec);
 	if (spec.flags == '-')
 		buff = ft_switchspace(buff);
-	if (ptr)
-		ptr = ft_strjoin(ptr, buff);
-	else
-		ptr = ft_strdup(buff);
+	ptr = (ptr) ? ft_strjoin(ptr, buff) : ft_strdup(buff);
 	return (ptr);
 }
