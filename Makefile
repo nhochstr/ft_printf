@@ -50,13 +50,13 @@ SRCS	=	ft_getleng.c \
 
 OBJ	= ${SRCS:.c=.o}
 
-INCS	= libftprintf.h
+INCS = libftprintf.h
 
-NAME	= libftprintf.a
+NAME = libftprintf.a
 
 CC = gcc
 
-CFLAGS	= 	-Wall -Werror -Wextra
+CFLAGS = -Wall -Werror -Wextra
 
 %.o: %.c	$(INCS)
 		$(CC) $(CFLAGS) -I $(INCS) -o $@ -c $<
