@@ -1,33 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf_s.c                                      :+:      :+:    :+:   */
+/*   ft_strjoins2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:48:11 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 11:28:34 by nhochstr         ###   ########.fr       */
+/*   Created: 2020/02/01 11:20:34 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/01 11:20:48 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libftprintf.h"
 #include "libft/libft.h"
 
-char	*ft_printf_s(t_spec spec, va_list args, char *ptr)
+char	*ft_strjoins2(char const *s1, char const *s2)
 {
-	char	*buff;
-	int		size;
-	char	*copy;
+	char	*ptr;
+	int		i;
+	int		leng;
+	int		j;
 
-	if (!(copy = ft_strdup(va_arg(args, char *))))
-		copy = ft_strdup("(null)");
-	size = ft_sizeprints(spec, copy);
-	buff = ft_malloc_space(size, sizeof(char));
-	buff = ft_printsleft(spec, copy, buff, size);
-	ptr = (ptr) ? ft_strjoins1(ptr, buff) : ft_strdup(buff);
-	free (copy);
-	if (buff)
-		free (buff);
+	if (!s1 || !s2)
+		return (NULL);
+	leng = ft_strlen(s1) + ft_strlen(s2);
+	i = 0;
+	j = 0;
+	if (!(ptr = malloc((leng + 1) * sizeof(char))))
+		return (NULL);
+	while (s1[i] != '\0')
+	{
+		ptr[i] = s1[i];
+		i++;
+	}
+	while (s2[j] != '\0')
+	{
+		ptr[i + j] = s2[j];
+		j++;
+	}
+	ptr[i + j] = '\0';
+	free((char *)s2);
 	return (ptr);
 }

@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/13 14:44:08 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 13:41:05 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int		ft_getspelengwidth(const char *format, int leng)
 
 char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 {
-	t_spec spec;
+	t_spec	spec;
+	char	*printf;
 
 	if (format[leng] == '%')
 		leng++;
@@ -47,5 +48,6 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	if (spec.type != 0)
 		leng++;
 	ft_getleng(leng);
-	return (ft_printfspe(spec, args, ptr, format));
+	printf = ft_printfspe(spec, args, ptr, format);
+	return (printf);
 }

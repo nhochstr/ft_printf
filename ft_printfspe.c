@@ -6,13 +6,12 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:33:31 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/13 14:44:13 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 11:19:33 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-
-#include <stdio.h>
+#include "libft/libft.h"
 
 char	*ft_printfspeptr(char *ptr, const char *format, t_spec spec)
 {
@@ -24,6 +23,8 @@ char	*ft_printfspeptr(char *ptr, const char *format, t_spec spec)
 		buff = ft_malloc_space(spec.width, sizeof(char));
 	else
 		buff = ft_malloc_space(1, sizeof(char));
+	if (!buff)
+		return (NULL);
 	if (spec.flags == '-' && spec.width > 1)
 		buff[0] = format[leng];
 	else if (spec.width > 1)
@@ -32,7 +33,7 @@ char	*ft_printfspeptr(char *ptr, const char *format, t_spec spec)
 		buff[0] = format[leng];
 	if (spec.flags == '0')
 		buff = ft_replacespacezero(buff, spec);
-	ptr = (ptr) ? ft_strjoin(ptr, buff) : ft_strdup(buff);
+	ptr = (ptr) ? ft_strjoins1(ptr, buff) : ft_strdup(buff);
 	return (ptr);
 }
 

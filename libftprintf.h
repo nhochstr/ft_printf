@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/13 11:02:56 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 11:20:04 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,5 +75,7 @@ int				ft_printf(const char *format, ...);
 int				ft_getspelengwidth(const char *format, int leng);
 char			*ft_printfspeptr(char *ptr, const char *format, t_spec spec);
 int				ft_printflen(char *ptr, const char *format);
+char			*ft_strjoins2(char const *s1, char const *s2);
+char			*ft_strjoins1(char const *s1, char const *s2);
 
 #endif

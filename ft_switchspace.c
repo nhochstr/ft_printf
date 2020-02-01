@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:54:11 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:45:41 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 11:47:56 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_switchspace(char *buff)
 		ptr[j++] = buff[i++];
 	while (ptr[j] != '\0')
 		ptr[j++] = ' ';
+	free(buff);
 	return (ptr);
 }

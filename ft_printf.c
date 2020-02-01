@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/12 15:45:57 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 12:05:05 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int ft_printf(const char *format, ...)
 	va_list args;
 	char	*ptr;
 	int		leng;
+	int		size;
 
 	leng = 0;
 	if (format[leng] == '\0')
@@ -40,5 +41,7 @@ int ft_printf(const char *format, ...)
 	}
 	va_end(args);
 	ft_putstr_fd(ptr, 1);
-	return (ft_printflen(ptr, format));
+	size = ft_printflen(ptr, format);
+	free(ptr);
+	return (size);
 }

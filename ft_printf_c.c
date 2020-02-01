@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:28:44 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:46:41 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 11:24:03 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ char *ft_printf_c(t_spec spec, va_list args, char *ptr)
 {
 	char	*buff;
 
+	buff = NULL;
 	if (spec.width > 1)
 		buff = ft_malloc_space(spec.width, sizeof(char));
 	else
@@ -29,8 +30,10 @@ char *ft_printf_c(t_spec spec, va_list args, char *ptr)
 	else
 		buff[0] = va_arg(args, int);
 	if (ptr)
-		ptr = ft_strjoin(ptr, buff);
+		ptr = ft_strjoins1(ptr, buff);
 	else
 		ptr = ft_strdup(buff);
+	if (buff)
+		free(buff);
 	return (ptr);
 }

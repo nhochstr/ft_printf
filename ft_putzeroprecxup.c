@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:29:07 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:29:55 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 12:01:41 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ char	*ft_putzeroprecxup(char *buff, int neg, t_spec spec)
 	while (size > i && size >= 0)
 		buff[size--] = '0';
 	if (size < 0 && neg == 1)
-		buff = ft_strjoin("-", buff);
+		buff = ft_strjoins2("-", buff);
 	if (size > 0 && neg == 1)
 		buff[size] = '-';
 	return (buff);
