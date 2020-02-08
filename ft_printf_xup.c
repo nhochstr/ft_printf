@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:32:56 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 15:21:38 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 15:46:51 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char	*ft_printf_xup(t_spec spec, va_list args, char *ptr)
 		free(buff);
 		return (ptr);
 	}
-	if ((unsigned long)spec.width > ft_strlen(buff))
+	if ((unsigned long)spec.width > ft_strlen(buff) && spec.precision <= spec.width)
 		bspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
 	else if (spec.precision > (long) ft_strlen(buff) && spec.precision > spec.width)
 		bspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
