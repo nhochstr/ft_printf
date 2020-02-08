@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:30:40 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 15:46:47 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:10:51 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ char	*ft_printf_x(t_spec spec, va_list args, char *ptr)
 		buff = ft_repspczerox(buff, spec);
 	if (spec.flags == '-')
 		buff = ft_switchspace(buff);
-	ptr = (ptr) ? ft_strjoins1(ptr, buff) : ft_strdup(buff);
+	ptr = (ptr) ? ft_joinprintf(ptr, buff) : ft_strdup(buff);
 	free(buff);
 	if (bspace)
 		free(bspace);

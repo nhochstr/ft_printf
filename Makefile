@@ -47,7 +47,8 @@ SRCS	=	ft_getleng.c \
 			ft_printf.c \
 			ft_strjoins1.c \
 			ft_strjoins2.c \
-			ft_getnbr0.c
+			ft_getnbr0.c \
+			ft_joinprintf.c
 
 OBJ	= ${SRCS:.c=.o}
 

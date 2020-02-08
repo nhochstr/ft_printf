@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/04 13:39:00 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:33:16 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,5 +78,10 @@ int				ft_printflen(char *ptr, const char *format);
 char			*ft_strjoins2(char const *s1, char const *s2);
 char			*ft_strjoins1(char const *s1, char const *s2);
 int				ft_getnbr0(int i);
+char			*ft_joinprintf(char const *s1, char const *s2);
+char			*ft_joinprintfnull(char const *s1, char const *s2);
+size_t			ft_strlenprintf(const char *s);
+char			*ft_dupnull(const char *s);
+char			*ft_joinprintf_to(char const *s1, char const *s2, char c);
 
 #endif

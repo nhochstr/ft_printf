@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:51:12 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 13:50:11 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 17:10:13 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
 	else if (ft_strlen(buffptr) < (unsigned long)spec.width)
 		buffptr = ft_strjoins2(buffspace, buffptr);
 	if (ptr)
-		ptr = ft_strjoins1(ptr, buffptr);
+		ptr = ft_joinprintf(ptr, buffptr);
 	else
 		ptr = ft_strdup(buffptr);
 	if (buffspace)
