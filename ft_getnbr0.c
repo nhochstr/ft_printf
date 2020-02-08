@@ -1,24 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getwidth.c                                      :+:      :+:    :+:   */
+/*   ft_getnbr0.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:21:37 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/04 13:39:01 by nhochstr         ###   ########.fr       */
+/*   Created: 2020/02/01 17:48:11 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/08 12:01:59 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
-#include "libft/libft.h"
 #include "libftprintf.h"
+#include "libft/libft.h"
 
-long	ft_getwidth(const char *format, int leng, va_list args)
+int		ft_getnbr0(int i)
 {
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	static int	nbr = 0;
+	int			mem;
+
+	mem = nbr;
+	if (i > 0)
+		nbr = nbr + i;
+	if (i < 0)
+		nbr = 0;
+	return (mem);
 }

@@ -6,12 +6,14 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 13:41:05 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 12:59:53 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft/libft.h"
 #include "libftprintf.h"
+//haha
+#include <stdio.h>
 
 int		ft_getspelengwidth(const char *format, int leng)
 {
@@ -25,7 +27,7 @@ int		ft_getspelengwidth(const char *format, int leng)
 char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 {
 	t_spec	spec;
-	char	*printf;
+	char	*vprintf;
 
 	if (format[leng] == '%')
 		leng++;
@@ -33,10 +35,14 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	while (spec.flags != 0 && (format[leng] == '-' || format[leng] == '0'))
 		leng++;
 	spec.width = ft_getwidth(format, leng, args);
-	if (spec.width != 0)
-		leng = ft_getspelengwidth(format, leng);
+	if (spec.width < 0)
+	{
+		spec.flags = '-';
+		spec.width = -spec.width;
+	}
+	leng = ft_getspelengwidth(format, leng);
 	spec.precision = ft_getprecision(format, leng, args);
-	if (spec.precision != -1)
+	if (format[leng] == '.')
 	{
 		leng++;
 		while (ft_isdigit(format[leng]) == 1 )
@@ -48,6 +54,6 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	if (spec.type != 0)
 		leng++;
 	ft_getleng(leng);
-	printf = ft_printfspe(spec, args, ptr, format);
-	return (printf);
+	vprintf = ft_printfspe(spec, args, ptr, format);
+	return (vprintf);
 }

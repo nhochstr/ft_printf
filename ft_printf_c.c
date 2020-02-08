@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:28:44 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 11:24:03 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/01 17:50:32 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,19 @@ char *ft_printf_c(t_spec spec, va_list args, char *ptr)
 	else
 		buff = ft_malloc_space(1, sizeof(char));
 	if (spec.flags == '-' && spec.width > 1)
+	{
 		buff[0] = va_arg(args, int);
+		if (buff[0] == '\0')
+		{
+			buff = ft_strjoins1(buff, &buff[1]);
+			ft_getnbr0(1);
+		}
+	}
 	else if (spec.width > 1)
 		buff[spec.width - 1] = va_arg(args, int);
 	else
 		buff[0] = va_arg(args, int);
-	if (ptr)
-		ptr = ft_strjoins1(ptr, buff);
-	else
-		ptr = ft_strdup(buff);
+	ptr = (ptr) ? ft_strjoins1(ptr, buff) : ft_strdup(buff);
 	if (buff)
 		free(buff);
 	return (ptr);
