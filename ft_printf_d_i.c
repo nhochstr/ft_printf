@@ -6,13 +6,15 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:56:13 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 12:58:00 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 14:42:56 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libftprintf.h"
 #include "libft/libft.h"
+//&é
+#include <stdio.h>
 
 char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 {
@@ -24,7 +26,14 @@ char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0' && spec.precision < spec.width)
 	{
 		free(buff);
-		ptr = (ptr) ? ft_strjoins1(ptr, " ") : ft_strdup(" ");
+		if (spec.width > 0)
+		{
+			buffspace = ft_malloc_space(spec.width, sizeof(char));
+			ptr = (ptr) ? ft_strjoins1(ptr, buffspace) : ft_strdup(buffspace);
+			free(buffspace);
+		}
+		else
+			ptr = (ptr) ? ft_strjoins1(ptr, " ") : ft_strdup(" ");
 		return (ptr);
 	}
 	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0' && spec.precision >= spec.width)

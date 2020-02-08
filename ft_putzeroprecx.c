@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:28:23 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 11:58:47 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/08 14:52:55 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ char	*ft_putzeroprecx(char *buff, int neg, t_spec spec)
 		buff[size--] = '0';
 	if (size < 0 && neg == 1)
 		buff = ft_strjoins2("-", buff);
-	if (size > 0 && neg == 1)
+	if (size >= 0 && neg == 1)
 		buff[size] = '-';
 	return (buff);
 }
