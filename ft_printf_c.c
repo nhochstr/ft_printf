@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:28:44 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 18:27:48 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/09 13:41:06 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ char *ft_printf_c(t_spec spec, va_list args, char *ptr)
 		ft_getnbr0(1);
 	}
 	else
-		ptr = (ptr) ? ft_strjoins1(ptr, buff) : ft_strdup(buff);
+		ptr = (ptr) ? ft_joinprintf(ptr, buff) : ft_strdup(buff);
 	if (buff)
 		free(buff);
 	return (ptr);
