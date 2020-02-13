@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 10:20:47 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 11:45:31 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,22 @@ unsigned long	ft_strlento(char *str, char c)
 		str = str + 1;
 	}
 	return (i);
+}
+
+int				ft_printflen(char *ptr, const char *format)
+{
+	int	i;
+
+	i = 1;
+	if (ptr[0] == '\0' && format[0] == '%')
+	{
+		while (format[i] == '0' || format[i] == '-' || format[i] == '.' ||
+			ft_isdigit(format[i]) == 1 || format[i] == 'c' || format[i] == '*')
+		{
+			if (format[i] == 'c')
+				return (1);
+			i++;
+		}
+	}
+	return (ft_strlen(ptr));
 }

@@ -1,42 +1,60 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin_to.c                                    :+:      :+:    :+:   */
+/*   ft_count_nbr_string.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:18:30 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:45:11 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/10/17 14:40:30 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/13 11:44:23 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
 #include "libftprintf.h"
 
-char	*ft_strjoin_to(char const *s1, char const *s2, char c)
+long	ft_countnbr(long nbr)
 {
-	char	*ptr;
-	int		i;
-	int		leng;
-	int		j;
+	long i;
 
-	leng = ft_strlen((char*)s1) + ft_strlento((char*)s2, c);
 	i = 0;
-	j = 0;
-	if (!(ptr = malloc((leng + 1) * sizeof(char))))
-		return (NULL);
-	while (s1[i] != '\0')
+	if (nbr == 0)
+		return (1);
+	if (nbr < 0)
 	{
-		ptr[i] = s1[i];
+		i = 1;
+		nbr = nbr * -1;
+	}
+	while (nbr > 0)
+	{
+		nbr = nbr / 10;
 		i++;
 	}
-	while (s2[j] != c && s2[j] != '\0')
+	return (i);
+}
+
+int		ft_countstring(char const *s, char *str)
+{
+	int	i;
+	int	j;
+	int nbr;
+
+	i = 0;
+	nbr = 0;
+	j = 0;
+	while (s[i] != 0)
 	{
-		ptr[i + j] = s2[j];
-		j++;
+		if (s[i] == str[j])
+		{
+			j++;
+			if (str[j] == 0)
+			{
+				nbr++;
+				j = 0;
+			}
+		}
+		else
+			j = 0;
+		i++;
 	}
-	ptr[i + j] = '\0';
-	if (s1)
-		free((char *)s1);
-	return (ptr);
+	return (nbr);
 }

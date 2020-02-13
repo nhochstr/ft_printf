@@ -1,39 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:28:54 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 11:11:15 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int	ft_atoi(const char *str)
+int	ft_isdigit(int c)
 {
-	int					k;
-	unsigned long long	n;
+	if (c >= '0' && c <= '9')
+		return (1);
+	return (0);
+}
 
-	k = 1;
-	while (*str == ' ' || *str == '\t' || *str == '\n' ||
-			*str == '\v' || *str == '\f' || *str == '\r')
-		str++;
-	if (*str == '-')
-		k = -k;
-	if (*str == '+' || *str == '-')
-		str++;
-	n = 0;
-	while (*str >= '0' && *str <= '9')
-	{
-		n = n * 10 + (*str - 48);
-		str++;
-	}
-	if (n > 9223372036854775807 && k < 0)
-		return (0);
-	if (n > 9223372036854775807 && k > 0)
-		return (-1);
-	return (n * k);
+int	ft_ishexa(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'a' && c <= 'f'))
+		return (1);
+	return (0);
+}
+
+int	ft_ishexaupper(int c)
+{
+	if ((c >= '0' && c <= '9') || (c >= 'A' && c <= 'F'))
+		return (1);
+	return (0);
 }
