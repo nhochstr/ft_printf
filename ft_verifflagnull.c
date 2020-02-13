@@ -6,13 +6,13 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:24:35 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:46:46 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:20:18 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-int ft_verifflagnull(t_spec spec)
+int	ft_verifflagnull(t_spec spec)
 {
 	if (spec.flags != '0')
 		return (1);

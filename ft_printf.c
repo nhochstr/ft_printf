@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 08:40:41 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:12:46 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int		ft_setptr(char **ptr, const char *format, int leng)
 	return (leng);
 }
 
-int 	ft_printf(const char *format, ...)
+int		ft_printf(const char *format, ...)
 {
 	va_list args;
 	char	*ptr;

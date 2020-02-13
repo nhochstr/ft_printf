@@ -56,7 +56,8 @@ SRCS	=	ft_getleng.c \
 			ft_strdup.c \
 			ft_strlen.c \
 			ft_bzero.c \
-			ft_strjoinnomalloc.c
+			ft_strjoinnomalloc.c \
+			ft_setdigit.c
 
 OBJ	= ${SRCS:.c=.o}
 

@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:18:50 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 08:31:33 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:14:58 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ char	*ft_dupnull(const char *s)
 	ptr[i] = '\0';
 	return (ptr);
 }
-
-
 
 char	*ft_joinprintf_to(char const *s1, char const *s2, char c)
 {

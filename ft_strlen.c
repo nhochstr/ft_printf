@@ -6,13 +6,13 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 08:26:23 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:20:47 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-size_t	ft_strlen(const char *s)
+size_t			ft_strlen(const char *s)
 {
 	size_t	i;
 
@@ -25,7 +25,7 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-size_t	ft_strlenprintf(const char *s)
+size_t			ft_strlenprintf(const char *s)
 {
 	size_t	i;
 	int		j;
@@ -45,7 +45,7 @@ size_t	ft_strlenprintf(const char *s)
 	return (i);
 }
 
-size_t	ft_strlennull(const char *s)
+size_t			ft_strlennull(const char *s)
 {
 	size_t	i;
 

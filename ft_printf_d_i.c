@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:56:13 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:43:33 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:01:45 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,28 +20,8 @@ char	*ft_printf_d_i(t_spec spec, va_list args, char *ptr)
 
 	buffspace = NULL;
 	buff = ft_itoa_long(va_arg(args, int));
-	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0' && spec.precision < spec.width)
-	{
-		free(buff);
-		if (spec.width > 0)
-		{
-			buffspace = ft_malloc_space(spec.width, sizeof(char));
-			ptr = (ptr) ? ft_joinprintf(ptr, buffspace) : ft_strdup(buffspace);
-			free(buffspace);
-		}
-		else
-			ptr = (ptr) ? ft_joinprintf(ptr, " ") : ft_strdup(" ");
+	if (ft_setptrdigit(spec, &buff, &buffspace, &ptr) == 1)
 		return (ptr);
-	}
-	if (spec.precision == 0 && buff[0] == '0' && buff[1] == '\0' && spec.precision >= spec.width)
-	{
-		free(buff);
-		return (ptr);
-	}
-	if ((unsigned long)spec.width > ft_strlen(buff) && spec.precision <= spec.width)
-		buffspace = ft_malloc_space(spec.width - ft_strlen(buff), sizeof(char));
-	if (spec.precision > (long)ft_strlen(buff) && spec.precision > spec.width)
-		buffspace = ft_malloc_space(spec.precision - ft_strlen(buff), sizeof(char));
 	if (buffspace)
 		buff = ft_strjoins2(buffspace, buff);
 	if (spec.precision >= 0 && spec.flags == '0')

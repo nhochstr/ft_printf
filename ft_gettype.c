@@ -6,13 +6,13 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:23:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:42:48 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:11:20 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
 
-char ft_gettype(const char *format, int leng)
+char	ft_gettype(const char *format, int leng)
 {
 	if (format[leng] == 'c')
 		return ('c');

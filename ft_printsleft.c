@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:47:31 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:44:22 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:14:17 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	*ft_printsleft(t_spec spec, char *copy, char *buff, unsigned int size)
 {
 	int	i[3];
-	
+
 	i[0] = 0;
 	i[1] = 0;
 	i[2] = 0;

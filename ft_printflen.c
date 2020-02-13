@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 14:37:45 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:44:16 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 10:13:57 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ int	ft_printflen(char *ptr, const char *format)
 	int	i;
 
 	i = 1;
-	if (ptr[0] == '\0' && format[0]== '%')
+	if (ptr[0] == '\0' && format[0] == '%')
 	{
-		while (format[i] == '0' || format[i] == '-' || format[i] == '.' || 
+		while (format[i] == '0' || format[i] == '-' || format[i] == '.' ||
 			ft_isdigit(format[i]) == 1 || format[i] == 'c' || format[i] == '*')
 		{
 			if (format[i] == 'c')
@@ -27,5 +27,5 @@ int	ft_printflen(char *ptr, const char *format)
 			i++;
 		}
 	}
-	return(ft_strlen(ptr));
+	return (ft_strlen(ptr));
 }
