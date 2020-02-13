@@ -6,12 +6,11 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:54:11 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 11:47:56 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:46:27 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 char	*ft_switchspace(char *buff)
 {

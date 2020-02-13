@@ -6,15 +6,12 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:28:44 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/09 13:54:45 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:43:29 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
 #include "libftprintf.h"
-#include "libft/libft.h"
-//
-#include <stdio.h>
 
 char *ft_printf_c(t_spec spec, va_list args, char *ptr)
 {

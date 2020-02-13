@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 17:33:16 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:41:47 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <stdlib.h>
 # include <stdarg.h>
-# include "libft/libft.h"
 
 typedef struct			s_spec
 {
@@ -83,5 +82,13 @@ char			*ft_joinprintfnull(char const *s1, char const *s2);
 size_t			ft_strlenprintf(const char *s);
 char			*ft_dupnull(const char *s);
 char			*ft_joinprintf_to(char const *s1, char const *s2, char c);
+int				ft_atoi(const char *str);
+void			*ft_calloc(size_t count, size_t size);
+long			ft_countnbr(long nbr);
+int				ft_isdigit(int c);
+void			ft_putchar_fd(char c, int fd);
+char			*ft_strdup(const char *s);
+size_t			ft_strlen(const char *s);
+void			ft_bzero(void *s, size_t n);
 
 #endif

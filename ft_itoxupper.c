@@ -6,11 +6,10 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:25:24 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:45:27 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:42:59 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "libftprintf.h"
 
 char	*ft_itoxupper(long nbr)

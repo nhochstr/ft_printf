@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getprecision.c                                  :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:22:54 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:42:21 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/12 16:28:57 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
+#include <stdlib.h>
 #include "libftprintf.h"
 
-long	ft_getprecision(const char *format, int leng, va_list args)
+void	*ft_calloc(size_t count, size_t size)
 {
-	if (format[leng] == '.')
-		leng++;
-	else
-		return (-1);
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	void	*ptr;
+
+	if (!(ptr = malloc(count * size)))
+		return (NULL);
+	ft_bzero(ptr, count * size);
+	return (ptr);
 }

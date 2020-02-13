@@ -1,27 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getprecision.c                                  :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:22:54 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:42:21 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/12 16:42:02 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libftprintf.h"
 
-long	ft_getprecision(const char *format, int leng, va_list args)
+void	ft_bzero(void *s, size_t n)
 {
-	if (format[leng] == '.')
-		leng++;
-	else
-		return (-1);
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	size_t		i;
+
+	i = 0;
+	while (n--)
+		((unsigned char *)s)[i++] = 0;
 }

@@ -6,11 +6,10 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:29:07 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 14:52:59 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:44:41 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "libftprintf.h"
 
 char	*ft_putzeroprecxup(char *buff, int neg, t_spec spec)

@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getprecision.c                                  :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/29 21:22:54 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:42:21 by nhochstr         ###   ########.fr       */
+/*   Created: 2019/10/17 09:49:20 by nhochstr          #+#    #+#             */
+/*   Updated: 2020/02/12 16:31:38 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdarg.h>
 #include "libftprintf.h"
 
-long	ft_getprecision(const char *format, int leng, va_list args)
+size_t	ft_strlen(const char *s)
 {
-	if (format[leng] == '.')
-		leng++;
-	else
-		return (-1);
-	if (format[leng] == '*')
-		return (va_arg(args, int));
-	else if (ft_isdigit(format[leng]) == 1)
-		return (ft_atoi(&format[leng]));
-	return (0);
+	size_t	i;
+
+	i = 0;
+	while (*s != '\0')
+	{
+		i++;
+		s = s + 1;
+	}
+	return (i);
 }

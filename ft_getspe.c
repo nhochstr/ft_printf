@@ -6,14 +6,11 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/08 12:59:53 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:42:32 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "libftprintf.h"
-//haha
-#include <stdio.h>
 
 int		ft_getspelengwidth(const char *format, int leng)
 {
@@ -30,6 +27,8 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	char	*vprintf;
 
 	if (format[leng] == '%')
+		leng++;
+	while (format[leng] == ' ')
 		leng++;
 	spec.flags = ft_getflag(format, leng);
 	while (spec.flags != 0 && (format[leng] == '-' || format[leng] == '0'))

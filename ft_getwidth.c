@@ -6,12 +6,11 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:21:37 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/04 13:39:01 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:42:37 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdarg.h>
-#include "libft/libft.h"
 #include "libftprintf.h"
 
 long	ft_getwidth(const char *format, int leng, va_list args)

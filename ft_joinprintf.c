@@ -6,14 +6,12 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/01 11:18:50 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/09 13:16:30 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:43:16 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
-//
-#include <stdio.h>
+
 size_t	ft_strlenprintf(const char *s)
 {
 	size_t	i;

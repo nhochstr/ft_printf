@@ -6,11 +6,10 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 14:37:45 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/12/12 15:46:30 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:44:16 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft/libft.h"
 #include "libftprintf.h"
 
 int	ft_printflen(char *ptr, const char *format)

@@ -6,12 +6,11 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:49:16 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/01 11:34:35 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:44:52 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 char	*ft_revtabpointer(char *buffptr)
 {

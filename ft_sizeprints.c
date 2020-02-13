@@ -6,12 +6,11 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:27:58 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 23:31:10 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:44:56 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 int	ft_sizeprints(t_spec spec, char *copy)
 {

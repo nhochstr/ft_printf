@@ -6,13 +6,12 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:54:56 by nhochstr          #+#    #+#             */
-/*   Updated: 2019/11/29 22:44:39 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/12 16:42:49 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include "libftprintf.h"
-#include "libft/libft.h"
 
 char	*ft_itoa_long(long n)
 {
