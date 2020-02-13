@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:42:32 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 07:49:33 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,19 @@ int		ft_getspelengwidth(const char *format, int leng)
 	if (format[leng] == '*')
 		leng++;
 	return (leng);
+}
+
+int		ft_getspelengprec(const char *format, int leng)
+{
+	if (format[leng] == '.')
+	{
+		leng++;
+		while (ft_isdigit(format[leng]) == 1 )
+			leng++;
+		if (format[leng] == '*')
+			leng++;
+	}
+	return(leng);
 }
 
 char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
@@ -41,14 +54,7 @@ char	*ft_getspe(const char *format, int leng, va_list args, char	*ptr)
 	}
 	leng = ft_getspelengwidth(format, leng);
 	spec.precision = ft_getprecision(format, leng, args);
-	if (format[leng] == '.')
-	{
-		leng++;
-		while (ft_isdigit(format[leng]) == 1 )
-			leng++;
-		if (format[leng] == '*')
-			leng++;
-	}
+	leng = ft_getspelengprec(format, leng);
 	spec.type = ft_gettype(format, leng);
 	if (spec.type != 0)
 		leng++;

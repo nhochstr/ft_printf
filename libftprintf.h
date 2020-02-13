@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:41:47 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 08:31:27 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,9 @@ void			ft_putchar_fd(char c, int fd);
 char			*ft_strdup(const char *s);
 size_t			ft_strlen(const char *s);
 void			ft_bzero(void *s, size_t n);
+size_t			ft_strlennull(const char *s);
+int				ft_joinwithoutmalloczero(char *s1, const char *s2);
+int				ft_joinwithoutmallocij(char *s1, const char *s2, int i, int j);
+int				ft_joinwithoutmalloci(char *s1, const char *s2, int i);
 
 #endif

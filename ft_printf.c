@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/12 16:43:25 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/13 08:40:41 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,17 @@ void	ft_putprintf_fd(char *s, int fd)
 	}
 }
 
-int ft_printf(const char *format, ...)
+int		ft_setptr(char **ptr, const char *format, int leng)
+{
+	if (*ptr)
+		*ptr = ft_joinprintf_to(*ptr, &format[leng], '%');
+	else
+		*ptr = ft_strdup_to((char *)&format[leng], '%');
+	leng = leng + ft_strlento((char *)&format[leng], '%');
+	return (leng);
+}
+
+int 	ft_printf(const char *format, ...)
 {
 	va_list args;
 	char	*ptr;
@@ -47,11 +57,7 @@ int ft_printf(const char *format, ...)
 	va_start(args, format);
 	while (format[leng] != '\0')
 	{
-		if (ptr)
-			ptr = ft_joinprintf_to(ptr, &format[leng], '%');
-		else
-			ptr = ft_strdup_to((char *)&format[leng], '%');
-		leng = leng + ft_strlento((char *)&format[leng], '%');
+		leng = ft_setptr(&ptr, format, leng);
 		if (format[leng] != '\0')
 		{
 			ptr = ft_getspe(format, leng, args, ptr);
