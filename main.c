@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 15:16:18 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/17 20:01:59 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -171,12 +171,10 @@ int main()
 	(void)z;
 	printf("%d\n", y);
 	printf("------------------------------------------------------------------------------------------------------------------\n")
-	*/
 	z = printf("r test 511: %    .4d\n", 30);//327
 	y = ft_printf("f test 511: %    .4d\n", 30);
 	printf("%d - %d\n", z, y);
 	printf("------------------------------------------------------------------------------------------------------------------\n");
-	/*
 	z = printf("r test 511: %0-00005i\n", 5);
 	y = ft_printf("f test 511: %0-00005i\n", 5);
 	printf("%d - %d\n", z, y);
@@ -194,6 +192,11 @@ int main()
 	printf("%d - %d\n", j, i);
 	printf("------------------------------------------------------------------------------------------------------------------\n");
 	*/
+	//z = printf("%5");//327
+	y = ft_printf("%5c", 'a');
+	printf("\n%d - %d\n", z, y);
+	printf("------------------------------------------------------------------------------------------------------------------\n");
+	while (1);
 	return 0;
 }
 /*
@@ -202,4 +205,5 @@ int main()
 ./disable-test "*_a_*"  && ./disable-test "*notmandatory*" && ./disable-test "*lmin*" && ./disable-test "*lmax*" && ./disable-test "*hmin*" && ./disable-test "*hmax*" && ./disable-test "*as_*"
 ./disable-test "*_o_*"  && ./disable-test "*argnum*"
 ./disable-test 318 && ./disable-test 320 && ./disable-test 375 && ./disable-test 484 && ./disable-test 486 && ./disable-test 487 && ./disable-test 490 && ./disable-test 491 && ./disable-test 646 && ./disable-test 648 && ./disable-test 703 && ./disable-test 812 && ./disable-test 814 && ./disable-test 815
+./disable-test "*_sp*" && ./disable-test "*sp_" && ./disable-test 2648  
 */

@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 11:45:12 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/17 19:58:04 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,10 @@ char	*ft_printfspeptr(char *ptr, const char *format, t_spec spec)
 	int		leng;
 
 	leng = ft_getleng(0);
+	if (format[leng] == '\0')
+		ptr = (ptr) ? ft_joinprintf(ptr, "") : ft_strdup("");
+	if (format[leng] == '\0')
+		return (ptr);
 	if (spec.width > 1)
 		buff = ft_malloc_space(spec.width, sizeof(char));
 	else
