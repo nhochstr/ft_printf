@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:34:57 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/17 19:58:04 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/18 10:06:59 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,9 @@ char	*ft_printfspe(t_spec spec, va_list args, char *ptr, const char *format)
 	if (spec.type == 0)
 	{
 		ptr = ft_printfspeptr(ptr, format, spec);
-		ft_getleng(ft_getleng(0) + 1);
+		if (format[ft_getleng(0)] != '\0')
+			ft_getleng(ft_getleng(0) + 1);
 	}
-	if (ft_verifflagnull(spec) == 0)
-		return (NULL);
 	if (spec.type == 'c')
 		ptr = ft_printf_c(spec, args, ptr);
 	if (spec.type == 's')

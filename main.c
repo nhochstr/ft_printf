@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/20 11:47:25 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/17 20:44:32 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/18 09:53:56 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,10 +188,5 @@ int main()
 	return 0;
 }
 /*
-./disable-test f && ./disable-test "*_as*" && ./disable-test "*_l_*" && ./disable-test "*_ll_*" && ./disable-test "*_h_*" && ./disable-test "*_hh_*" && ./disable-test "*ljas*" && ./disable-test "*_ll*" && ./disable-test "*_hh*"
-./disable-test "*_f_*" && ./disable-test mix && ./disable-test "*_ld_*" && ./disable-test o && ./disable-test "*af*" && ./disable-test "*_diff_*" && ./disable-test "*_hash_*"  && ./disable-test "*_e_*" && ./disable-test "*_g_*"
-./disable-test "*_a_*"  && ./disable-test "*notmandatory*" && ./disable-test "*lmin*" && ./disable-test "*lmax*" && ./disable-test "*hmin*" && ./disable-test "*hmax*" && ./disable-test "*as_*"
-./disable-test "*_o_*"  && ./disable-test "*argnum*"
-./disable-test 318 && ./disable-test 320 && ./disable-test 375 && ./disable-test 484 && ./disable-test 486 && ./disable-test 487 && ./disable-test 490 && ./disable-test 491 && ./disable-test 646 && ./disable-test 648 && ./disable-test 703 && ./disable-test 812 && ./disable-test 814 && ./disable-test 815
-./disable-test "*_sp*" && ./disable-test "*sp_" && ./disable-test 2648  
+./disable-test f && ./disable-test "*_as*" && ./disable-test "*_l_*" && ./disable-test "*_ll_*" && ./disable-test "*_h_*" && ./disable-test "*_hh_*" && ./disable-test "*ljas*" && ./disable-test "*_ll*" && ./disable-test "*_hh*" && ./disable-test "*_f_*" && ./disable-test mix && ./disable-test "*_ld_*" && ./disable-test o && ./disable-test "*af*" && ./disable-test "*_diff_*" && ./disable-test "*_hash_*"  && ./disable-test "*_e_*" && ./disable-test "*_g_*" && ./disable-test "*_a_*"  && ./disable-test "*notmandatory*" && ./disable-test "*lmin*" && ./disable-test "*lmax*" && ./disable-test "*hmin*" && ./disable-test "*hmax*" && ./disable-test "*as_*" && ./disable-test "*_o_*"  && ./disable-test "*argnum*" && ./disable-test 318 && ./disable-test 320 && ./disable-test 375 && ./disable-test 484 && ./disable-test 486 && ./disable-test 487 && ./disable-test 490 && ./disable-test 491 && ./disable-test 646 && ./disable-test 648 && ./disable-test 703 && ./disable-test 812 && ./disable-test 814 && ./disable-test 815 && ./disable-test "*_sp*" && ./disable-test "*sp_" && ./disable-test 2648  
 */
