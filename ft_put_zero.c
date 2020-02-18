@@ -49,7 +49,7 @@ char	*ft_putzeroprec(char *buff, int neg, t_spec spec)
 
 	size = ft_strlen(buff) - 1;
 	i = size - spec.precision;
-	while (ft_isdigit(buff[size]) == 1)
+	while (size >= 0 && ft_isdigit(buff[size]) == 1)
 		size--;
 	while (size > i && size >= 0)
 		buff[size--] = '0';
@@ -67,7 +67,7 @@ char	*ft_putzeroprecx(char *buff, int neg, t_spec spec)
 
 	size = ft_strlen(buff) - 1;
 	i = size - spec.precision;
-	while (ft_ishexa(buff[size]) == 1)
+	while (size >= 0 && ft_ishexa(buff[size]) == 1)
 		size--;
 	while (size > i && size >= 0)
 		buff[size--] = '0';
@@ -85,7 +85,7 @@ char	*ft_putzeroprecxup(char *buff, int neg, t_spec spec)
 
 	size = ft_strlen(buff) - 1;
 	i = size - spec.precision;
-	while (ft_ishexaupper(buff[size]) == 1)
+	while (size >= 0 && ft_ishexaupper(buff[size]) == 1)
 		size--;
 	while (size > i && size >= 0)
 		buff[size--] = '0';
