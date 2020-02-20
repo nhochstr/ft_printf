@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:53:27 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/20 22:11:17 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:33:56 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,20 @@ char	*ft_repspczerop(char *buff)
 
 	i = 0;
 	while (buff[i] != '\0')
+	{
+		if (buff[i] == ' ')
+			buff[i] = '0';
+		i++;
+	}
+	return (buff);
+}
+
+char	*ft_repspczeros(char *buff, int size)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i] != '\0' && i < size)
 	{
 		if (buff[i] == ' ')
 			buff[i] = '0';

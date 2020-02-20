@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/20 22:24:08 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:34:00 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,5 +107,6 @@ int						ft_setptrdigit(t_spec spec, char **buff, char **bspace,
 char					*ft_repspczerop(char *buff);
 char					*ft_setbuffp(va_list args);
 char					*ft_ptr_addr(long addr, char *buffptr, int i);
+char					*ft_repspczeros(char *buff, int size);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:48:11 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 11:31:18 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:32:18 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ char	*ft_printf_s(t_spec spec, va_list args, char *ptr)
 		copy = ft_strdup("(null)");
 	size = ft_sizeprints(spec, copy);
 	buff = ft_malloc_space(size, sizeof(char));
+	if (spec.flags == '0')
+		buff = ft_repspczeros(buff, size);
 	buff = ft_printsleft(spec, copy, buff, size);
 	ptr = (ptr) ? ft_joinprintf(ptr, buff) : ft_strdup(buff);
 	free(copy);
