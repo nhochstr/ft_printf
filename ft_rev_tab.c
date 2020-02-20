@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 22:23:31 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 11:35:12 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 15:47:11 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ char	*ft_revtabpointer(char *buffptr)
 	char	c;
 
 	i = 0;
-	buffptr = ft_strjoins1(buffptr, "x0");
 	leng = ft_strlen(buffptr) - 1;
 	while (i <= leng)
 	{

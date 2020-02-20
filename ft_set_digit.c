@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_setdigit.c                                      :+:      :+:    :+:   */
+/*   ft_set_digit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/13 09:59:40 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 10:23:06 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:24:15 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,20 @@ int		ft_setptrdigit(t_spec spec, char **buff, char **bspace, char **ptr)
 	}
 	ft_setbspace(spec, *buff, bspace);
 	return (0);
+}
+
+char	*ft_setbuffp(va_list args)
+{
+	char			*buff;
+	char			*buffptr;
+	unsigned long	ptrr;
+
+	buff = va_arg(args, char *);
+	if (!buff)
+		return (NULL);
+	ptrr = (unsigned long)buff;
+	buffptr = ft_calloc(2, sizeof(char *));
+	buffptr = ft_ptr_addr(ptrr, buffptr, 0);
+	buffptr = ft_revtabpointer(buffptr);
+	return (buffptr);
 }

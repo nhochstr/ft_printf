@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/10/17 14:07:32 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 10:27:53 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:24:08 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,5 +104,8 @@ int						ft_joinwithoutmalloci(char *s1, const char *s2, int i);
 void					ft_setbspace(t_spec spec, char *b, char **bspace);
 int						ft_setptrdigit(t_spec spec, char **buff, char **bspace,
 	char **ptr);
+char					*ft_repspczerop(char *buff);
+char					*ft_setbuffp(va_list args);
+char					*ft_ptr_addr(long addr, char *buffptr, int i);
 
 #endif

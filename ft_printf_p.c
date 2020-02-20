@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:51:12 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 11:31:48 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:27:41 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,75 @@ char	*ft_ptr_addr(long addr, char *buffptr, int i)
 	return (buffptr);
 }
 
-char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
+char	*ft_mallocp(t_spec spec, int leng, int i)
 {
-	char			*buff;
-	unsigned long	ptrr;
-	char			*buffptr;
-	char			*bspace;
+	if (i == 0)
+		return(ft_malloc_space((spec.precision - leng), sizeof(char)));
+	if (i == 1)
+		return(ft_malloc_space((spec.precision - (2 + leng)), sizeof(char)));
+	return (0);
+}
+
+char	*ft_setspacepp(t_spec spec, char *buff)
+{
+	char	*bs;
+	int		leng;
+
+	leng = 0;
+	if (buff)
+		leng = ft_strlen(buff);
+	bs = ft_strdup("0x");
+	if (spec.precision > 0 && spec.precision > leng && buff)
+		bs = ft_strjoins1(bs, ft_mallocp(spec, leng, 0));
+	if (spec.precision > 0 && !buff)
+		bs = ft_strjoins1(bs, ft_malloc_space(spec.precision, sizeof(char)));
+	if (spec.precision == -1 && spec.flags == '0' && spec.width > (leng + 2) &&
+		buff)
+		bs = ft_strjoins1(bs, ft_mallocp(spec, leng, 1));
+	if (spec.precision == -1 && spec.flags == '0' && (spec.width - 2) > 0 &&
+		!buff)
+		bs = ft_strjoins1(bs, ft_malloc_space((spec.width - 2), sizeof(char)));
+	if (spec.precision != -1 || spec.flags == '0')
+		bs = ft_repspczerop(bs);
+	if (buff)
+		bs = ft_strjoins1(bs, buff);
+	if (buff)
+		free(buff);
+	return (bs);
+}
+
+char	*ft_setspacepw(t_spec spec, char *buff)
+{
+	char	*bspace;
+	int		leng;
 
 	bspace = NULL;
-	buff = va_arg(args, char *);
-	ptrr = (unsigned long)buff;
-	buffptr = ft_calloc(2, sizeof(char *));
-	buffptr = ft_ptr_addr(ptrr, buffptr, 0);
-	buffptr = ft_revtabpointer(buffptr);
-	if (ft_strlen(buffptr) < (unsigned long)spec.width)
-		bspace = ft_malloc_space(spec.width - ft_strlen(buffptr), sizeof(char));
-	if (ft_strlen(buffptr) < (unsigned long)spec.width && spec.flags == '-')
-		buffptr = ft_strjoins1(buffptr, bspace);
-	else if (ft_strlen(buffptr) < (unsigned long)spec.width)
-		buffptr = ft_strjoins2(bspace, buffptr);
-	if (ptr)
-		ptr = ft_joinprintf(ptr, buffptr);
-	else
-		ptr = ft_strdup(buffptr);
-	if (bspace)
-		free(bspace);
+	leng = ft_strlen(buff);
+	if ((spec.flags != '0' && spec.precision > 0 && spec.width <= leng) ||
+		(spec.flags == '0' && spec.precision == -1))
+		return (buff);
+	if (leng == 2 && spec.precision == -1)
+	{
+		buff = ft_strjoins1(buff, "0");
+		leng++;
+	}
+	if (spec.width > leng)
+		bspace = ft_malloc_space((spec.width - leng), sizeof(char));
+	bspace = (bspace) ? ft_strjoins1(bspace, buff) : ft_strdup(buff);
+	if (spec.flags == '-' && bspace)
+		bspace = ft_switchspace(bspace);
+	free(buff);
+	return (bspace);
+}
+
+char	*ft_printf_p(t_spec spec, va_list args, char *ptr)
+{
+	char			*buffptr;
+
+	buffptr = ft_setbuffp(args);
+	buffptr = ft_setspacepp(spec, buffptr);
+	buffptr = ft_setspacepw(spec, buffptr);
+	ptr = (ptr) ? ft_joinprintf(ptr, buffptr) : ft_strdup(buffptr);
 	free(buffptr);
 	return (ptr);
 }

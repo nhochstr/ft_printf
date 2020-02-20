@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:53:27 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/13 11:34:38 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/20 22:11:17 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,5 +63,19 @@ char	*ft_repspczeroxup(char *buff, t_spec spec)
 		buff = ft_putzeroflagx(buff, neg);
 	else
 		buff = ft_putzeroprecxup(buff, neg, spec);
+	return (buff);
+}
+
+char	*ft_repspczerop(char *buff)
+{
+	int	i;
+
+	i = 0;
+	while (buff[i] != '\0')
+	{
+		if (buff[i] == ' ')
+			buff[i] = '0';
+		i++;
+	}
 	return (buff);
 }
