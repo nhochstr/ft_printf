@@ -6,7 +6,7 @@
 /*   By: nhochstr <nhochstr@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/29 21:51:12 by nhochstr          #+#    #+#             */
-/*   Updated: 2020/02/24 12:12:56 by nhochstr         ###   ########.fr       */
+/*   Updated: 2020/02/25 07:53:06 by nhochstr         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_mallocp(t_spec spec, int leng, int i)
 	if (i == 0)
 		return(ft_malloc_space((spec.precision - leng), sizeof(char)));
 	if (i == 1)
-		return(ft_malloc_space((spec.precision - (2 + leng)), sizeof(char)));
+		return(ft_malloc_space((spec.width - (2 + leng)), sizeof(char)));
 	return (0);
 }
 
@@ -46,6 +46,8 @@ char	*ft_setspacepp(t_spec spec, char *buff)
 		bptr = ft_mallocp(spec, leng, 0);
 	if (spec.precision > 0 && !buff)
 		bptr = ft_malloc_space(spec.precision, sizeof(char));
+	if (spec.precision == -1 && spec.flags == '0' && spec.width < 3)
+		spec.width = 3;
 	if (spec.precision == -1 && spec.flags == '0' && spec.width > (leng + 2) &&
 		buff)
 		bptr = ft_mallocp(spec, leng, 1);
